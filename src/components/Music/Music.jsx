@@ -2,30 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./Music.css";
 
 const Music = () => {
-  const [audio] = useState(new Audio(".public/music/music.mp3"));
   const [isPlay, setPlay] = useState(false);
+  let music = new Audio("../../public/music/music.mp3");
 
   const playMusic = () => {
     setPlay(!isPlay);
   };
 
-  useEffect(() => {
-    if (isPlay) {
-      audio.loop = true;
-      audio.play();
-    } else {
-      audio.pause();
-    }
-
-    return () => {
-      audio.pause();
-    };
-  }, [isPlay, audio]);
+  isPlay ? music.play() : music.pause();
 
   return (
     <div className="music-container">
       <h1>Hello</h1>
-      <button onClick={playMusic}>{isPlay ? "Pause" : "Play"}</button>
+      <button onClick={playMusic}>PLAY</button>
     </div>
   );
 };
