@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Music.css";
 
 const Music = () => {
+  const musicRef = useRef(new Audio("../../public/music/music.mp3"));
   const [isPlay, setPlay] = useState(false);
-  let music = new Audio("../../public/music/music.mp3");
+
+  useEffect(() => {
+    const music = musicRef.current;
+    music.loop = true;
+
+    return () => {
+      music.pause();
+      music.currentTime = 0;
+    };
+  }, []);
 
   const playMusic = () => {
     setPlay(!isPlay);
   };
 
-  isPlay ? music.play() : music.pause();
+  isPlay ? musicRef.current.play() : musicRef.current.pause();
 
   return (
     <div className="music-container">
