@@ -6,7 +6,6 @@ import Music from "./components/Music/Music";
 const App = () => {
   return (
     <div>
-      <Background />
       <Music />
     </div>
   );
