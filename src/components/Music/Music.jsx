@@ -23,8 +23,7 @@ const Music = () => {
 
   return (
     <div className="music-container">
-      <h1>Hello</h1>
-      <button onClick={playMusic}>PLAY</button>
+      <button onClick={playMusic}>{isPlay ? "PAUSE" : "PLAY"}</button>
     </div>
   );
 };
