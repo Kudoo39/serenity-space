@@ -25,13 +25,13 @@ const Music = () => {
 
   return (
     <div className="music-container">
-      <button onClick={playMusic}>
+      <div className="button">
         {isPlay ? (
-          <FaRegPauseCircle className="music-icon" />
+          <FaRegPauseCircle className="music-icon" onClick={playMusic} />
         ) : (
-          <IoIosPlayCircle className="music-icon" />
+          <IoIosPlayCircle className="music-icon" onClick={playMusic} />
         )}
-      </button>
+      </div>
     </div>
   );
 };
