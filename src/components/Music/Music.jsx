@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Music.css";
+import { IoIosPlayCircle } from "react-icons/io";
+import { FaRegPauseCircle } from "react-icons/fa";
 
 const Music = () => {
   const musicRef = useRef(new Audio("../../public/music/music.mp3"));
@@ -23,7 +25,13 @@ const Music = () => {
 
   return (
     <div className="music-container">
-      <button onClick={playMusic}>{isPlay ? "PAUSE" : "PLAY"}</button>
+      <button onClick={playMusic}>
+        {isPlay ? (
+          <FaRegPauseCircle className="music-icon" />
+        ) : (
+          <IoIosPlayCircle className="music-icon" />
+        )}
+      </button>
     </div>
   );
 };

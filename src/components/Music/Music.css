@@ -1,3 +1,15 @@
 .music-container {
   z-index: 2;
 }
+
+button {
+  background: rgba(0, 0, 0, 0.415);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.375);
+}
+
+.music-icon {
+  font-size: 50px;
+}
