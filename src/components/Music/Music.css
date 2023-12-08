@@ -2,7 +2,8 @@
   position: fixed;
   z-index: 2;
   width: 100%;
-  top: 93.17%;
+  top: auto;
+  bottom: 0;
 }
 
 .button {
