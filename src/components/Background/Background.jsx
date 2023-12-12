@@ -7,15 +7,17 @@ const Background = () => {
   const [weather, setWeather] = useState(Day);
 
   const changeWeather = () => {
-    setWeather((weather) => {
-      return weather === Day ? Rain : Day;
+    console.log("Changing weather...");
+    setWeather((currentWeather) => {
+      console.log("Current Weather:", currentWeather);
+      return currentWeather === Day ? Rain : Day;
     });
   };
 
   return (
     <div className="background-container">
       <button onClick={changeWeather}>Boom!</button>
-      <video className="video" autoPlay loop muted>
+      <video key={weather} className="video" autoPlay loop muted>
         <source src={weather} type="video/mp4" />
       </video>
     </div>
