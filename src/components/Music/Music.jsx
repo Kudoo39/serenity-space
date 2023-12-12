@@ -38,7 +38,7 @@ const Music = () => {
     "music26.mp3",
   ];
   const [index, setIndex] = useState(0);
-  const musicRef = useRef(new Audio(`../../public/music/${musicList[index]}`));
+  const musicRef = useRef(new Audio(`/music/${musicList[index]}`));
   const [isPlay, setPlay] = useState(false);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Music = () => {
   }, []);
 
   useEffect(() => {
-    musicRef.current = new Audio(`../../public/music/${musicList[index]}`);
+    musicRef.current = new Audio(`/music/${musicList[index]}`);
   }, [index]);
 
   useEffect(() => {
