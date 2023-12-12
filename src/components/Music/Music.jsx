@@ -53,13 +53,16 @@ const Music = () => {
 
   useEffect(() => {
     musicRef.current = new Audio(`../../public/music/${musicList[index]}`);
-    setPlay(isPlay);
-    isPlay ? musicRef.current.play() : musicRef.current.pause();
   }, [index]);
 
   useEffect(() => {
-    isPlay ? musicRef.current.play() : musicRef.current.pause();
-  }, [isPlay]);
+    const music = musicRef.current;
+    isPlay ? music.play() : music.pause();
+    return () => {
+      music.pause();
+      music.currentTime = 0;
+    };
+  }, [isPlay, index]);
 
   const playMusic = () => {
     setPlay(!isPlay);
