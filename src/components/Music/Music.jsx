@@ -58,9 +58,11 @@ const Music = () => {
   useEffect(() => {
     const music = musicRef.current;
     isPlay ? music.play() : music.pause();
+    music.addEventListener("ended", nextMusic);
     return () => {
       music.pause();
       music.currentTime = 0;
+      music.removeEventListener("ended", nextMusic);
     };
   }, [isPlay, index]);
 
