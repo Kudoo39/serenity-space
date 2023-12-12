@@ -53,9 +53,6 @@ const Music = () => {
 
   useEffect(() => {
     musicRef.current = new Audio(`/music/${musicList[index]}`);
-  }, [index]);
-
-  useEffect(() => {
     const music = musicRef.current;
     isPlay ? music.play() : music.pause();
     music.addEventListener("ended", nextMusic);
@@ -64,7 +61,12 @@ const Music = () => {
       music.currentTime = 0;
       music.removeEventListener("ended", nextMusic);
     };
-  }, [isPlay, index]);
+  }, [index]);
+
+  useEffect(() => {
+    const music = musicRef.current;
+    isPlay ? music.play() : music.pause();
+  }, [isPlay]);
 
   const playMusic = () => {
     setPlay(!isPlay);
@@ -72,12 +74,10 @@ const Music = () => {
 
   const previousMusic = () => {
     setIndex((index) => (index - 1 + musicList.length) % musicList.length);
-    console.log("previous");
   };
 
   const nextMusic = () => {
     setIndex((index) => (index + 1) % musicList.length);
-    console.log("next");
   };
 
   return (
