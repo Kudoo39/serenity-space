@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Background.css";
 import Day from "../../assets/city/day.mp4";
 import Rain from "../../assets/city/rain.mp4";
@@ -7,7 +7,7 @@ import { FaSun, FaCloudRain } from "react-icons/fa6";
 
 const Background = () => {
   const [weather, setWeather] = useState(Day);
-  const raining = new Audio("/sound/rain.mp3");
+  const raining = useRef(new Audio("/sound/rain.mp3"));
 
   const changeWeather = () => {
     setWeather((currentWeather) => {
@@ -16,10 +16,17 @@ const Background = () => {
   };
 
   useEffect(() => {
-    raining.loop = true;
+    raining.current.loop = true;
+
+    return () => {
+      raining.current.pause();
+      raining.current.currentTime = 0;
+    };
   }, []);
 
-  weather === Day ? raining.pause() : raining.play();
+  useEffect(() => {
+    weather === Rain ? raining.current.play() : raining.current.pause();
+  }, [weather]);
 
   return (
     <div className="background-container">
