@@ -4,6 +4,9 @@
 
 Create a personalized and calming working space that enhances focus, productivity, and relaxation. This project aims to provide users with a customizable environment featuring soothing backgrounds, relaxing music, ambient sounds, and productivity tools.
 
+![Serenity Space](src/assets/city/day.png)
+![Serenity Space](src/assets/city/rain.png)
+
 ## Features
 
 - **Soothing Backgrounds:** Choose from a variety of calming backgrounds to create a visually pleasing workspace.
