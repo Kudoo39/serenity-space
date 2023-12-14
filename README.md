@@ -14,6 +14,8 @@ Create a personalized and calming working space that enhances focus, productivit
 - **Relaxing Music:** Embed a player for background music to help users stay focused and relaxed during work sessions.
 
 - **Ambient Sounds:** Customize your environment with ambient sounds such as wind, rain, storms, people, and campfire.
+  
+[Live Demo](https://serenity-space.netlify.app/)
 
 ## Technologies Used
 
