@@ -15,7 +15,7 @@ Create a personalized and calming working space that enhances focus, productivit
 
 - **Ambient Sounds:** Customize your environment with ambient sounds such as wind, rain, storms, people, and campfire.
   
-[Live Demo](https://serenity-space.netlify.app/)
+  [Live Demo](https://serenity-space.netlify.app/)
 
 ## Technologies Used
 
