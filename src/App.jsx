@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Background from "./components/Background/Background";
 import Music from "./components/Music/Music";
@@ -7,10 +7,8 @@ import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 
 const App = () => {
   const handle = useFullScreenHandle();
-  const [fullscreen, setFullscreen] = useState(false);
   const toggleFullscreen = () => {
     handle.active ? handle.exit() : handle.enter();
-    setFullscreen(!handle.active);
   };
   return (
     <div>
