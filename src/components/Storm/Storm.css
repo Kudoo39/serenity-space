@@ -1,0 +1,8 @@
+.storm-container {
+  position: absolute;
+  z-index: 2;
+  font-size: 50px;
+  top: 25%;
+  left: 60%;
+  color: rgba(0, 0, 0, 0.322);
+}

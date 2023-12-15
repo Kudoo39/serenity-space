@@ -6,6 +6,9 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import Keyboard from "./components/Keyboard/Keyboard";
 import People from "./components/People/People";
+import Storm from "./components/Storm/Storm";
+import Sound from "./components/Sound/Sound";
+import { MdOutlineKeyboard } from "react-icons/md";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -22,6 +25,7 @@ const App = () => {
         <Music />
         <Keyboard />
         <People />
+        <Storm />
         <Background />
       </FullScreen>
     </div>
