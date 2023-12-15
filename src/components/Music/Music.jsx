@@ -5,7 +5,7 @@ import {
   IoIosSkipBackward,
   IoIosSkipForward,
 } from "react-icons/io";
-import { FaRegPauseCircle } from "react-icons/fa";
+import { FaRegPauseCircle, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 const Music = () => {
   const musicList = [
@@ -90,6 +90,10 @@ const Music = () => {
           <IoIosPlayCircle className="music-icon" onClick={playMusic} />
         )}
         <IoIosSkipForward className="music-icon" onClick={nextMusic} />
+      </div>
+      <div className="volume-container">
+        <FaVolumeUp className="volume-icon" />
+        <FaVolumeMute className="volume-icon" />
       </div>
     </div>
   );
