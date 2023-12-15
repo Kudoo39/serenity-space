@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { IoIosPeople } from "react-icons/io";
 import "./People.css";
 import Sound from "../Sound/Sound";

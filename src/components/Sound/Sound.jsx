@@ -18,15 +18,13 @@ const Sound = ({ audioSource, icon: Icon }) => {
     sounding.current.loop = true;
     sounding.current.volume = volume;
 
-    return () => {
+    if (isPlaying) {
+      sounding.current.play();
+    } else {
       sounding.current.pause();
       sounding.current.currentTime = 0;
-    };
-  }, [volume]);
-
-  useEffect(() => {
-    isPlaying ? sounding.current.play() : sounding.current.pause();
-  }, [isPlaying]);
+    }
+  }, [isPlaying, volume]);
 
   return (
     <div>

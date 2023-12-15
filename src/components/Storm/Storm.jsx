@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { GiElectric } from "react-icons/gi";
 import "./Storm.css";
 import Sound from "../Sound/Sound";

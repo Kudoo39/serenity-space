@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { MdOutlineKeyboard } from "react-icons/md";
 import "./Keyboard.css";
 import Sound from "../Sound/Sound";
