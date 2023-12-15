@@ -7,6 +7,7 @@ import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import Keyboard from "./components/Keyboard/Keyboard";
 import People from "./components/People/People";
 import Storm from "./components/Storm/Storm";
+import Campfire from "./components/Campfire/Campfire";
 
 const App = () => {
   const handle = useFullScreenHandle();
@@ -24,6 +25,7 @@ const App = () => {
         <Keyboard />
         <People />
         <Storm />
+        <Campfire />
         <Background />
       </FullScreen>
     </div>
