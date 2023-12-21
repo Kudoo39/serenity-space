@@ -1,84 +1,89 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./Music.css";
-import {
-  IoIosPlayCircle,
-  IoIosSkipBackward,
-  IoIosSkipForward,
-} from "react-icons/io";
-import { FaRegPauseCircle, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from 'react'
+import './Music.css'
+import { IoIosPlayCircle, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io'
+import { FaRegPauseCircle, FaVolumeUp, FaVolumeMute } from 'react-icons/fa'
 
 const Music = () => {
   const musicList = [
-    "music.mp3",
-    "music1.mp3",
-    "music2.mp3",
-    "music3.mp3",
-    "music4.mp3",
-    "music5.mp3",
-    "music6.mp3",
-    "music7.mp3",
-    "music8.mp3",
-    "music9.mp3",
-    "music10.mp3",
-    "music11.mp3",
-    "music12.mp3",
-    "music13.mp3",
-    "music14.mp3",
-    "music15.mp3",
-    "music16.mp3",
-    "music17.mp3",
-    "music18.mp3",
-    "music19.mp3",
-    "music20.mp3",
-    "music21.mp3",
-    "music22.mp3",
-    "music23.mp3",
-    "music24.mp3",
-    "music25.mp3",
-    "music26.mp3",
-  ];
-  const [index, setIndex] = useState(0);
-  const musicRef = useRef(new Audio(`/music/${musicList[index]}`));
-  const [isPlay, setPlay] = useState(false);
+    'music.mp3',
+    'music1.mp3',
+    'music2.mp3',
+    'music3.mp3',
+    'music4.mp3',
+    'music5.mp3',
+    'music6.mp3',
+    'music7.mp3',
+    'music8.mp3',
+    'music9.mp3',
+    'music10.mp3',
+    'music11.mp3',
+    'music12.mp3',
+    'music13.mp3',
+    'music14.mp3',
+    'music15.mp3',
+    'music16.mp3',
+    'music17.mp3',
+    'music18.mp3',
+    'music19.mp3',
+    'music20.mp3',
+    'music21.mp3',
+    'music22.mp3',
+    'music23.mp3',
+    'music24.mp3',
+    'music25.mp3',
+    'music26.mp3'
+  ]
+  const [index, setIndex] = useState(0)
+  const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
+  const [isPlay, setPlay] = useState(false)
+  const [volume, setVolume] = useState(0.5)
+
+  const handleVolume = (e) => {
+    const newVolume = parseFloat(e.target.value)
+    setVolume(newVolume)
+  }
 
   useEffect(() => {
-    const music = musicRef.current;
-    music.loop = true;
+    const music = musicRef.current
+    music.loop = true
+    music.volume = volume
 
+    if (isPlay) {
+      music.play()
+    } else {
+      music.pause()
+      music.currentTime = 0
+    }
+  }, [isPlay, volume])
+
+  useEffect(() => {
+    musicRef.current = new Audio(`/music/${musicList[index]}`)
+    const music = musicRef.current
+    isPlay ? music.play() : music.pause()
+    music.addEventListener('ended', nextMusic)
     return () => {
-      music.pause();
-      music.currentTime = 0;
-    };
-  }, []);
+      music.pause()
+      music.currentTime = 0
+      music.removeEventListener('ended', nextMusic)
+    }
+  }, [index])
 
   useEffect(() => {
-    musicRef.current = new Audio(`/music/${musicList[index]}`);
-    const music = musicRef.current;
-    isPlay ? music.play() : music.pause();
-    music.addEventListener("ended", nextMusic);
-    return () => {
-      music.pause();
-      music.currentTime = 0;
-      music.removeEventListener("ended", nextMusic);
-    };
-  }, [index]);
-
-  useEffect(() => {
-    const music = musicRef.current;
-    isPlay ? music.play() : music.pause();
-  }, [isPlay]);
+    const music = musicRef.current
+    isPlay ? music.play() : music.pause()
+  }, [isPlay])
 
   const playMusic = () => {
-    setPlay(!isPlay);
-  };
+    setPlay(!isPlay)
+  }
 
   const previousMusic = () => {
-    setIndex((index) => (index - 1 + musicList.length) % musicList.length);
-  };
+    setIndex((index) => (index - 1 + musicList.length) % musicList.length)
+  }
 
   const nextMusic = () => {
-    setIndex((index) => (index + 1) % musicList.length);
-  };
+    setIndex((index) => (index + 1) % musicList.length)
+  }
 
   return (
     <div className="music-container">
@@ -92,11 +97,13 @@ const Music = () => {
         <IoIosSkipForward className="music-icon" onClick={nextMusic} />
       </div>
       <div className="volume-container">
-        <FaVolumeUp className="volume-icon" />
-        <FaVolumeMute className="volume-icon" />
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <FaVolumeUp className="volume-icon" />
+          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} />
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Music;
+export default Music
