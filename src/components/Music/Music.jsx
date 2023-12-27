@@ -39,7 +39,7 @@ const Music = () => {
   const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
   const [isPlay, setPlay] = useState(false)
   const [volume, setVolume] = useState(0.5)
-  const [isLoop, setLoop] = useState(true)
+  const [isLoop, setLoop] = useState(false)
 
   const handleVolume = (e) => {
     const newVolume = parseFloat(e.target.value)
@@ -100,7 +100,7 @@ const Music = () => {
   return (
     <div className="music-container">
       <div className="loop-icon">
-        <RiLoopRightLine className={`music-icon ${!isLoop ? null : 'gold'}`} onClick={handleLoop} />
+        <RiLoopRightLine className={`music-icon ${!isLoop ? 'gray' : 'gold'}`} onClick={handleLoop} />
       </div>
       <div className="button">
         <IoIosSkipBackward className="music-icon" onClick={previousMusic} />
