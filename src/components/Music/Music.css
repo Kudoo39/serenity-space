@@ -15,10 +15,18 @@
   border: none;
 }
 
+.loop-icon {
+  margin-right: 10px;
+}
+
 .music-icon {
   font-size: 50px;
   color: rgba(255, 255, 255, 0.375);
   cursor: pointer;
+}
+
+.gold {
+  color: rgba(255, 215, 0, 0.375);
 }
 
 .music-icon:hover {
@@ -38,4 +46,16 @@
 
 .volume-icon:hover {
   color: rgba(198, 198, 198, 0.375);
+}
+
+@media screen and (max-width: 410px) {
+  .music-icon {
+    font-size: 40px;
+  }
+  .volume-container {
+    margin-left: 5px;
+  }
+  .loop-icon {
+    margin-right: 5px;
+  }
 }

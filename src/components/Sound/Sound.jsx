@@ -27,16 +27,30 @@ const Sound = ({ audioSource, icon: Icon }) => {
   }, [isPlaying, volume])
 
   return (
-    <>
+    <div style={{ display: 'inline-block' }}>
       {isPlaying ? (
-        <div>
-          <Icon onClick={toggleSound} />
+        <div style={{ position: 'relative' }}>
+          <Icon
+            onClick={toggleSound}
+            style={{
+              backgroundColor: 'rgba(52, 152, 219, 0.7)',
+              border: '2px solid #000',
+              borderRadius: '30px'
+            }}
+          />
           <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} />
         </div>
       ) : (
-        <Icon onClick={toggleSound} />
+        <Icon
+          onClick={toggleSound}
+          style={{
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            border: '1px solid #000',
+            borderRadius: '30px'
+          }}
+        />
       )}
-    </>
+    </div>
   )
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import './Music.css'
 import { IoIosPlayCircle, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io'
 import { FaRegPauseCircle, FaVolumeUp, FaVolumeMute } from 'react-icons/fa'
+import { RiLoopRightLine } from 'react-icons/ri'
 
 const Music = () => {
   const musicList = [
@@ -38,10 +39,15 @@ const Music = () => {
   const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
   const [isPlay, setPlay] = useState(false)
   const [volume, setVolume] = useState(0.5)
+  const [isLoop, setLoop] = useState(true)
 
   const handleVolume = (e) => {
     const newVolume = parseFloat(e.target.value)
     setVolume(newVolume)
+  }
+
+  const handleLoop = () => {
+    setLoop(!isLoop)
   }
 
   useEffect(() => {
@@ -61,11 +67,16 @@ const Music = () => {
     musicRef.current = new Audio(`/music/${musicList[index]}`)
     const music = musicRef.current
     isPlay ? music.play() : music.pause()
-    music.addEventListener('ended', nextMusic)
+    if (!isLoop) {
+      music.addEventListener('ended', nextMusic)
+    }
+
     return () => {
       music.pause()
       music.currentTime = 0
-      music.removeEventListener('ended', nextMusic)
+      if (!isLoop) {
+        music.removeEventListener('ended', nextMusic)
+      }
     }
   }, [index])
 
@@ -88,8 +99,12 @@ const Music = () => {
 
   return (
     <div className="music-container">
+      <div className="loop-icon">
+        <RiLoopRightLine className={`music-icon ${!isLoop ? null : 'gold'}`} onClick={handleLoop} />
+      </div>
       <div className="button">
         <IoIosSkipBackward className="music-icon" onClick={previousMusic} />
+
         {isPlay ? (
           <FaRegPauseCircle className="music-icon" onClick={playMusic} />
         ) : (
