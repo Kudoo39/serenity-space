@@ -33,8 +33,7 @@ const Music = () => {
     'music24.mp3',
     'music25.mp3',
     'music26.mp3',
-    'music27.mp3',
-    'music28.mp3'
+    'music27.mp3'
   ]
   const [index, setIndex] = useState(0)
   const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
