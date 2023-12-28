@@ -33,7 +33,8 @@ const Music = () => {
     'music24.mp3',
     'music25.mp3',
     'music26.mp3',
-    'music27.mp3'
+    'music27.mp3',
+    'music28.mp3'
   ]
   const [index, setIndex] = useState(0)
   const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
@@ -61,29 +62,22 @@ const Music = () => {
       music.pause()
       music.currentTime = 0
     }
-  }, [isPlay, volume])
+  }, [volume])
 
   useEffect(() => {
     musicRef.current = new Audio(`/music/${musicList[index]}`)
     const music = musicRef.current
-    isPlay ? music.play() : music.pause()
-    const handleEnd = () => {
-      music.pause()
-      music.currentTime = 0
-    }
-
     if (isLoop) {
-      music.addEventListener('ended', handleEnd)
-    } else {
-      music.addEventListener('ended', nextMusic)
+      music.loop = true
     }
-
+    isPlay ? music.play() : music.pause()
+    music.addEventListener('ended', nextMusic)
     return () => {
       music.pause()
       music.currentTime = 0
-      music.removeEventListener('ended', isLoop ? handleEnd : nextMusic)
+      music.removeEventListener('ended', nextMusic)
     }
-  }, [index])
+  }, [isLoop, index])
 
   useEffect(() => {
     const music = musicRef.current
