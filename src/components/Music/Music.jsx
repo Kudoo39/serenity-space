@@ -67,16 +67,19 @@ const Music = () => {
     musicRef.current = new Audio(`/music/${musicList[index]}`)
     const music = musicRef.current
     isPlay ? music.play() : music.pause()
-    if (!isLoop) {
-      music.addEventListener('ended', nextMusic)
+    if (isLoop === false) {
+      return () => {
+        music.pause()
+        music.currentTime = 0
+      }
     }
+
+    music.addEventListener('ended', nextMusic)
 
     return () => {
       music.pause()
       music.currentTime = 0
-      if (!isLoop) {
-        music.removeEventListener('ended', nextMusic)
-      }
+      music.removeEventListener('ended', nextMusic)
     }
   }, [index])
 
