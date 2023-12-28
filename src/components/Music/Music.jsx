@@ -103,7 +103,11 @@ const Music = () => {
   return (
     <div className="music-container">
       <div className="loop-icon">
-        <RiLoopRightLine className={`music-icon ${!isLoop ? 'gray' : 'gold'}`} onClick={handleLoop} />
+        {!isLoop ? (
+          <RiLoopRightLine className="music-icon" onClick={handleLoop} />
+        ) : (
+          <RiLoopRightLine className="music-icon gold" onClick={handleLoop} />
+        )}
       </div>
       <div className="button">
         <IoIosSkipBackward className="music-icon" onClick={previousMusic} />
