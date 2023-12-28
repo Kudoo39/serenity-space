@@ -102,11 +102,11 @@ const Music = () => {
 
   return (
     <div className="music-container">
-      <div className="loop-icon">
+      <div className="loop-container">
         {!isLoop ? (
-          <RiLoopRightLine className="music-icon" onClick={handleLoop} />
+          <RiLoopRightLine className="loop-icon" onClick={handleLoop} />
         ) : (
-          <RiLoopRightLine className="music-icon gold" onClick={handleLoop} />
+          <RiLoopRightLine className="loop-icon gold" onClick={handleLoop} />
         )}
       </div>
       <div className="button">
