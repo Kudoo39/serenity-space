@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Music.css'
-import { IoIosPlayCircle, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io'
-import { FaRegPauseCircle, FaVolumeUp, FaVolumeMute } from 'react-icons/fa'
+import {
+  IoIosPlayCircle,
+  IoIosSkipBackward,
+  IoIosSkipForward
+} from 'react-icons/io'
+import { FaRegPauseCircle, FaVolumeUp } from 'react-icons/fa'
 import { RiLoopRightLine } from 'react-icons/ri'
 
 const Music = () => {
@@ -35,88 +39,113 @@ const Music = () => {
     'music26.mp3'
   ]
   const [index, setIndex] = useState(0)
-  const musicRef = useRef(new Audio(`/music/${musicList[index]}`))
+  const musicRef = useRef(null)
   const [isPlay, setPlay] = useState(false)
   const [volume, setVolume] = useState(0.5)
   const [isLoop, setLoop] = useState(false)
 
-  const handleVolume = (e) => {
-    const newVolume = parseFloat(e.target.value)
-    setVolume(newVolume)
-  }
-
-  const handleLoop = () => {
-    setLoop(!isLoop)
-  }
-
-  useEffect(() => {
-    const music = musicRef.current
-    music.loop = true
-    music.volume = volume
-
-    if (isPlay) {
-      music.play()
-    } else {
-      music.pause()
-      music.currentTime = 0
-    }
-  }, [volume])
-
   useEffect(() => {
     musicRef.current = new Audio(`/music/${musicList[index]}`)
     const music = musicRef.current
+
     if (isLoop) {
       music.loop = true
     }
-    isPlay ? music.play() : music.pause()
+
+    if (isPlay) {
+      music.play()
+    }
+
     music.addEventListener('ended', nextMusic)
+
     return () => {
       music.pause()
       music.currentTime = 0
       music.removeEventListener('ended', nextMusic)
     }
-  }, [isLoop, index])
+  }, [index, isLoop])
 
   useEffect(() => {
     const music = musicRef.current
-    isPlay ? music.play() : music.pause()
+    if (isPlay) {
+      music.play()
+    } else {
+      music.pause()
+    }
   }, [isPlay])
 
+  useEffect(() => {
+    musicRef.current.volume = volume
+  }, [volume])
+
   const playMusic = () => {
-    setPlay(!isPlay)
+    setPlay((prev) => !prev)
   }
 
   const previousMusic = () => {
-    setIndex((index) => (index - 1 + musicList.length) % musicList.length)
+    setIndex(
+      (prevIndex) => (prevIndex - 1 + musicList.length) % musicList.length
+    )
   }
 
   const nextMusic = () => {
-    setIndex((index) => (index + 1) % musicList.length)
+    setIndex((prevIndex) => (prevIndex + 1) % musicList.length)
+  }
+
+  const handleVolume = (e) => {
+    setVolume(parseFloat(e.target.value))
+  }
+
+  const handleLoop = () => {
+    setLoop((prev) => !prev)
   }
 
   return (
-    <div className="music-container">
-      <div className="loop-container">
-        {!isLoop ? (
-          <RiLoopRightLine className="loop-icon" onClick={handleLoop} />
-        ) : (
-          <RiLoopRightLine className="loop-icon gold" onClick={handleLoop} />
-        )}
+    <div className='music-container'>
+      <div className='loop-container'>
+        <RiLoopRightLine
+          className={`loop-icon ${isLoop ? 'gold' : ''}`}
+          onClick={handleLoop}
+          aria-label={isLoop ? 'Disable loop' : 'Enable loop'}
+        />
       </div>
-      <div className="button">
-        <IoIosSkipBackward className="music-icon" onClick={previousMusic} />
-
+      <div className='button'>
+        <IoIosSkipBackward
+          className='music-icon'
+          onClick={previousMusic}
+          aria-label='Previous track'
+        />
         {isPlay ? (
-          <FaRegPauseCircle className="music-icon" onClick={playMusic} />
+          <FaRegPauseCircle
+            className='music-icon'
+            onClick={playMusic}
+            aria-label='Pause'
+          />
         ) : (
-          <IoIosPlayCircle className="music-icon" onClick={playMusic} />
+          <IoIosPlayCircle
+            className='music-icon'
+            onClick={playMusic}
+            aria-label='Play'
+          />
         )}
-        <IoIosSkipForward className="music-icon" onClick={nextMusic} />
+        <IoIosSkipForward
+          className='music-icon'
+          onClick={nextMusic}
+          aria-label='Next track'
+        />
       </div>
-      <div className="volume-container">
+      <div className='volume-container'>
         <div style={{ display: 'flex', gap: '12px' }}>
-          <FaVolumeUp className="volume-icon" />
-          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolume} />
+          <FaVolumeUp className='volume-icon' />
+          <input
+            type='range'
+            min='0'
+            max='1'
+            step='0.01'
+            value={volume}
+            onChange={handleVolume}
+            aria-label='Volume control'
+          />
         </div>
       </div>
     </div>
