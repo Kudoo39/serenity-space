@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import './Sound.css'
 import PropTypes from 'prop-types'
 
 const Sound = ({ audioSource, icon: Icon }) => {

@@ -1,0 +1,10 @@
+.sound-icon {
+  border-radius: 30px;
+  border: 1px solid #000;
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.sound-icon.playing {
+  border-width: 2px;
+  background-color: rgba(52, 152, 219, 0.7);
+}
